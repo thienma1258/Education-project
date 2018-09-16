@@ -1,0 +1,211 @@
+.numberCircle {
+    border-radius: 50%;
+    width: 120px; 
+    font-size: 32px;
+    border: 2px solid #666;
+}
+.number {
+    text-align: center;
+    line-height: 120px;
+    display: block;
+}
+.green{
+  color:green;
+  border: 1;
+}
+.red{
+  color:red;
+  border: 1;
+}
+
+body {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: white;
+  overflow: hidden;
+}
+
+.dizzy-gillespie {
+  -webkit-filter: saturate(3);
+          filter: saturate(3);
+  width: 0.1px;
+  height: 0.1px;
+  border: 40px solid transparent;
+  border-radius: 5px;
+  -webkit-animation: loader 3s ease-in infinite, spin 1s linear infinite;
+          animation: loader 3s ease-in infinite, spin 1s linear infinite;
+}
+
+.dizzy-gillespie::before {
+  -webkit-filter: saturate(0.3);
+          filter: saturate(0.3);
+  display: block;
+  position: absolute;
+  z-index: -1;
+  margin-left: -40px;
+  margin-top: -40px;
+  content: '';
+  height: 0.1;
+  width: 0.1;
+  border: 40px solid transparent;
+  border-radius: 5px;
+  -webkit-animation: loader 2s ease-in infinite reverse, spin 0.8s linear infinite reverse;
+          animation: loader 2s ease-in infinite reverse, spin 0.8s linear infinite reverse;
+}
+
+.dizzy-gillespie::after {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  margin-left: -10px;
+  margin-top: -10px;
+  content: '';
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+@-webkit-keyframes loader {
+  0% {
+    border-bottom-color: transparent;
+    border-top-color: #114357;
+  }
+  25% {
+    border-left-color: transparent;
+    border-right-color: #826C75;
+  }
+  50% {
+    border-top-color: transparent;
+    border-bottom-color: #F29492;
+  }
+  75% {
+    border-right-color: transparent;
+    border-left-color: #826C75;
+  }
+  100% {
+    border-bottom-color: transparent;
+    border-top-color: #114357;
+  }
+}
+
+@keyframes loader {
+  0% {
+    border-bottom-color: transparent;
+    border-top-color: #114357;
+  }
+  25% {
+    border-left-color: transparent;
+    border-right-color: #826C75;
+  }
+  50% {
+    border-top-color: transparent;
+    border-bottom-color: #F29492;
+  }
+  75% {
+    border-right-color: transparent;
+    border-left-color: #826C75;
+  }
+  100% {
+    border-bottom-color: transparent;
+    border-top-color: #114357;
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+
+
+
+
+
+/*clock section css*/
+
+body {
+  background-color: #F2F2F2;
+  font-family: 'Poller One', cursive;
+  margin: auto;
+  text-align: center;
+}
+
+h1{
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+/* Combined count down clock, segment label and circle around it */
+#clock {
+  margin-left: 20%;
+}
+
+/* circle around clock */
+.timer {
+  border: solid 15px green;
+  border-radius: 180px;
+  height: 200px;
+  width: 200px;
+}
+.timerred {
+  border: solid 15px red;
+  border-radius: 180px;
+  height: 200px;
+  width: 200px;
+}
+.timeryellow {
+  border: solid 15px yellow;
+  border-radius: 180px;
+  height: 200px;
+  width: 200px;
+}
+/* actual countdown numbers */
+#counter {
+  font-size: 40px;
+  padding-top: 55px;
+}
+
+/* buttons to start, stop and reset clock */
+#controls {
+  padding-top: 1%;
+}
+
+/* buttons and displays for changing work and break times */
+#changes {
+  font-size: 20px;
+  padding-top: .5%;
+}
+
+
+.red{
+  color:red;
+}
+
+
+

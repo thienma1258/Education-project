@@ -1,0 +1,250 @@
+
+
+
+<div class="col-md-9"  >
+
+<div class="row show-hide messeage">
+  <div [ngClass]="messageClass">
+    {{message}}
+  </div>
+</div>
+
+<!-- Modal add new question -->
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add new question</h4>
+      </div>
+      <div class="modal-body">
+      <!-- type question -->
+      <div class="form-group">
+      <label for="typequestion">Type question</label>
+    
+      <select  name="typequestion" class="form-control" (change)="ChangeTypequestion($event)" required>
+        <option value="0">Question just only 1 right answer</option>
+        <option value="1">Question more than 1 right answer</option>
+        <option value="2">Question with the answer is text</option>
+      </select>
+      </div>
+<!-- Switch question  -->
+      <div class="questionssection" [ngSwitch]="type"  >
+      <!-- Question type 1 -->
+          <div class="questiontype1" *ngSwitchCase="0">
+
+       <div class="form-group">
+       <label for="questiontype1">Your question</label>
+       
+        <input type="text" name="questiontype1" class="form-control" [(ngModel)]="testquestion.question">{{testquestion.question}}
+          </div>
+          <div class="form-group">
+          <div class="row">
+          <div class="col-md-4">
+        <label for="countquestion">How many answer</label>
+        
+          <select name="countquestion" class="form-control " [(ngModel)]="testquestion.countanswer" >
+              <option value="2">2</option>
+             <option value="3">3</option>
+            <option value="4">4</option>
+             <option value="5">5</option>
+              <option value="6">6</option>
+             <option value="7">7</option>
+             <option value="8">8</option>
+          </select>
+          </div>
+     
+
+            <div class="col-md-4">
+                 <label for="countquestion">Generate answer</label>
+
+            <input type="button" class="btn btn-success " (click)="generateanswer()"   value="Generate">
+            </div>
+        </div>
+        </div>
+       
+        <!-- answer type 1 section -->
+        <div name="answerssection" >
+        <div class="answer" *ngFor="let item of testquestion.answers; let i=index ;trackBy:trackByFn " >
+       
+         <div class="radio">
+        <label>  <input type="radio"  value="{{i}}" [(ngModel)]="testquestion.rightanswer"  name="optradio"></label>
+            </div>
+            <textarea class="form-control" col="3" [(ngModel)]="testquestion.answers[i]"  autofocus ></textarea>
+        
+        </div>
+
+    
+
+        </div>
+        </div>
+        <!-- End question type 1 -->
+            <div class="questiontype2"  *ngSwitchCase="1">
+          Type 1
+          </div>
+           <div class="questiontype3"  *ngSwitchCase="2">
+          Type 2
+          </div>
+      </div>
+
+      
+      </div>
+      <!-- End question section -->
+      <div class="modal-footer">
+      <br>
+
+      <br>
+
+      <div style="clear:both"></div>
+      <button type="button" class="btn btn-success"  data-dismiss="modal" (click)="AddnewQuestion()">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end modal -->
+            <div class="profile-content">
+            <!-- panel  -->
+            <div class="panel panel-info">
+            <!-- heading panel -->
+			<div class=" panel-heading">
+			<strong class="title">Add new test</strong>
+			</div>
+			<!-- panel bod -->
+			<div class="panel-body">
+            <!-- Start form -->
+				<form [formGroup]="form" (submit)="onSubmitForm()">
+			<div class="form-group">
+    			<label for="title">Title  </label>
+    			<input formControlName="title" name="title" placeholder="Title" class="form-control" >
+                 <ul class="help-block">
+                     <li class="red" *ngIf="form.controls.title.errors?.required&&form.controls.title.dirty">This field is required</li>
+                     <li class="red" *ngIf="form.controls.title.errors?.validatetitle&&form.controls.title.dirty">Title just access normal characters , not have any special characters</li>
+                   
+                      <li class="red" *ngIf="form.controls.title.errors?.minlength&&form.controls.title.dirty">At least 5 characters</li>
+                   
+                      <li class="red" *ngIf="form.controls.title.errors?.maxlength&&form.controls.title.dirty">Maximum is 50 characters</li>
+                     </ul>
+
+
+
+    			</div>
+    			<div class="form-group">
+    				<label for="level">Choose your level of this test</label>
+                    <ul class="help-block">
+                     <li class="red" *ngIf="form.controls.typelevel.errors?.required">This field is required</li>
+                     </ul>
+    				<select formControlName="typelevel"  name="level" class="form-control input-lg" required>
+    				<option *ngFor="let item of level ;let i=index " value="{{i}}"  >{{item}}</option>
+    				
+    			</select>
+    			</div>
+    			<div class="form-group">
+    				<label for="category">Category</label>
+                     <ul class="help-block">
+                     <li class="red" *ngIf="form.controls.typecategory.errors?.required">This field is required</li>
+                     </ul>
+    				<select formControlName="typecategory"  name="category" class="form-control input-lg">
+
+    				<option *ngFor="let item of category ;let i=index " value="{{i}}"  >{{item}}</option>
+    				
+    			</select>
+    			</div>
+
+                <div class="form-group">
+                <div class="col-md-9">
+             <label for="fileupload">Upload</label>
+           <input type="file"  (change)="onChange($event)"  enctype="multipart/form-data"   accept="image/*" class="input-lg form-control ">
+           </div >
+           <div class="col-md-3">
+              <img src="{{form.get('titleimage').value}}" class="col-md-10" alt="Title image">
+              <input class="hidden"  formControlName="titleimage">
+              </div>
+                </div>
+
+                <div class="form-group">
+
+                    <label for="rules">Rules</label>
+                     <ul class="help-block">
+                     <li class="red" *ngIf="form.controls.typerules.errors?.required">This field is required</li>
+                     </ul>
+                    <select formControlName="typerules"  name="rules" class="form-control">
+
+                    <option *ngFor="let item of rules ;let i=index " value="{{i}}">{{item}}</option>
+                    
+                </select>
+                </div>
+                 <div class="form-group">
+                 <!--  select limit time or not -->
+                    <label for="times">Limit times</label>
+                     <ul class="help-block">
+                     <li class="red" *ngIf="form.controls.time.errors?.required">This field is required</li>
+                     </ul>
+                    <select (change)="typetimechange()" formControlName="time"  name="times" class="form-control">
+
+                    <option value="yes">YES</option>
+                    <option value="no">NO</option>
+                </select>
+                </div>
+    			{{form.valid}}
+
+                     <div class="form-group" *ngIf="form.get('time').value==='yes'">
+                     <!-- limit times -->
+                    <label for="times">How many minutes a test</label>
+                     <ul class="help-block">
+                     <li class="red" *ngIf="form.controls.times.errors?.required">This field is required</li>
+
+                     <li class="red" *ngIf="form.controls.times.errors?.validatenumber">Just input number</li>
+
+                     </ul>
+             <input id="name" name="name" class="form-control"
+          required  forbiddenName="bob"
+                formControlName="times" >
+                 </div>
+            <!-- Question section -->
+                <div class="questionsection" formArrayName="questions" >
+                     <div class="questions" class="form-group" *ngFor="let item of questions.controls;let i=index ">
+                         <div class="panel panel-info" >
+                            <div class="panel-heading"> Question{{i}}:<strong>{{item.controls.question.value}}</strong></div>
+
+                            <div class="panel-body">
+                                <div class="row">
+                            <!-- Question section -->
+                            <div *ngFor=" let answer of item.controls.answers.value ; let j=index ">
+                                <div class="col-md-12" style="text-align: center;font-size:20px" [ngClass]="{'alert-danger':!checkrightanswer(j,item.controls.rightanswer.value),'alert-success':checkrightanswer(j,item.controls.rightanswer.value)}" >
+                                    {{answer}}
+
+                                    <br>
+                                </div>
+
+                            </div>
+                            </div>
+                            <!-- ene question section -->
+                            </div>
+                         </div>
+                     </div>
+                    </div>
+
+                    <!-- End question section -->
+                 <!-- add new question -->
+                   <input type="submit" [disabled]="!form.valid" class="btn btn-primary btn-lg pull-right" value="Submit">
+                     <input type="button" class="btn btn-info btn-lg     pull-right" data-toggle="modal" data-target="#myModal" value="Add new questions">
+                   
+                    
+				</form>
+                <!-- end form -->
+			</div>
+			<!-- end body -->
+			</div>
+			<!-- end panel -->
+            </div>
+
+
+		</div>
+	
